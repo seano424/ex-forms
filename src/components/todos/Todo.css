@@ -8,6 +8,10 @@
   text-decoration: line-through;
 }
 
+.Todo h1 {
+  word-break: break-word;
+}
+
 .Todo h1,
 .Todo form {
   width: 660px;
@@ -34,6 +38,10 @@
   box-shadow: -1px -1px 5px lightgrey;
   border-bottom-left-radius: 4px;
     border-top-left-radius: 4px;
+}
+
+.Todo input:focus {
+  outline: none;
 }
 
 .Todo {

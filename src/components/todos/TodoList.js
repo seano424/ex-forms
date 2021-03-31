@@ -33,7 +33,7 @@ export default class TodoList extends Component {
   render() {
     return (
       <div>
-        <h1>Todos</h1>
+        <h1 style={{textAlign: 'center'}}>Todos</h1>
         <NewTodoForm
           addTodo={this.addTodo}
           placeholder="add a todo"
