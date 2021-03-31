@@ -1,33 +1,54 @@
-import React, { Component } from 'react'
-import NewTodoForm from './NewTodoForm'
-import Todo from './Todo'
+import React, { Component } from "react";
+import NewTodoForm from "./NewTodoForm";
+import Todo from "./Todo";
 
 export default class TodoList extends Component {
   state = {
-    todos: []
-  }
-  
+    todos: [],
+  };
+
   addTodo = (newTodo) => {
-    this.setState(prevState => ({
-      todos: [...prevState.todos, newTodo]
-    }))
-  }
+    this.setState((prevState) => ({
+      todos: [...prevState.todos, newTodo],
+    }));
+  };
 
   removeTodo = (id) => {
-    this.setState(prevState => ({
-      todos: prevState.todos.filter(todo => todo.id !== id)
-    }))
-  }
+    this.setState((prevState) => ({
+      todos: prevState.todos.filter((todo) => todo.id !== id),
+    }));
+  };
+
+  editTodo = (id, updatedTask) => {
+    const updatedTodos  = this.state.todos.map(todo => {
+      if (todo.id === id) {
+        return {...todo, task: updatedTask}
+      }
+      return todo
+    })
+    this.setState({ todos: updatedTodos })
+  
+  };
 
   render() {
     return (
       <div>
         <h1>Todos</h1>
-        <NewTodoForm addTodo={this.addTodo} />
-        {this.state.todos.map(todo => (
-          <Todo key={todo.id} todo={todo} removeTodo={this.removeTodo}/>
+        <NewTodoForm
+          addTodo={this.addTodo}
+          placeholder="add a todo"
+          button={true}
+        />
+        {this.state.todos.map((todo) => (
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            task={todo.task}
+            removeTodo={this.removeTodo}
+            editTodo={this.editTodo}
+          />
         ))}
       </div>
-    )
+    );
   }
 }

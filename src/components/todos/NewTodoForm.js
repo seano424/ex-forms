@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-
+import './NewTodoForm.css'
 
 export default class NewTodoForm extends Component {
   state = {
-    title: '',
+    task: '',
     id: ''
   }
 
   handleChange = (evt) => {
     this.setState({
-      title: evt.target.value
+      task: evt.target.value
     })
   }
 
@@ -19,7 +19,7 @@ export default class NewTodoForm extends Component {
     const newTodo = {...this.state, id: uuidv4()}
     this.props.addTodo(newTodo)
     this.setState({
-      title: '',
+      task: '',
       id: ''
     })
 
@@ -27,9 +27,9 @@ export default class NewTodoForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input placeholder="Add a todo" type="text" value={this.state.title} name="title" onChange={this.handleChange} />
-        <button>Submit</button>
+      <form className="NewTodoForm" onSubmit={this.handleSubmit}>
+        <input placeholder={this.props.placeholder} type="text" value={this.state.task} name="task" onChange={this.handleChange} />
+        {this.props.button ? <button>Submit</button> : ''}
       </form>
     )
   }
